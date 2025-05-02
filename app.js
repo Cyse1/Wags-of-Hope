@@ -13,4 +13,34 @@ document.addEventListener('DOMContentLoaded', () => {
       menu.classList.remove('active');
     });
   });
+
+  // Get all cards
+  const cards = document.querySelectorAll('.event-card');
+  
+  // Check viewport
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 && 
+      rect.bottom >= 0
+    );
+  }
+  
+  // Handle scroll
+  function handleScroll() {
+    const cardSection = document.getElementById('events');
+    
+    if (isInViewport(cardSection)) {
+      cards.forEach(card => {
+        card.classList.add('visible');
+      });
+    } else {
+      cards.forEach(card => {
+        card.classList.remove('visible');
+      });
+    }
+  }
+  
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
 });
